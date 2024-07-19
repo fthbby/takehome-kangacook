@@ -1,8 +1,9 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 function Title({data}) {
   return (
-    <div>{data}</div>
+    <Typography variant='h5'>{data}</Typography>
   )
 }
 

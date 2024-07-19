@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'restaurants',
+    
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
+     'http://localhost:3000',
+         "http://kangacook-01.s3-website.us-east-2.amazonaws.com",
+
 ]

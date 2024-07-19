@@ -22,7 +22,7 @@ function ViewInfo({ visible, cuisine, restaurant }) {
 
         {restaurant?.length > 0
           ? restaurant?.map((x) => <Title data={x.name} />)
-          : "no data"}
+          : "There is currently no Restaurant data"}
       </Grid>
 
       <Grid xs={12} md={6} display='flex' alignItems={"center"} flexDirection={"column"}>
@@ -30,7 +30,7 @@ function ViewInfo({ visible, cuisine, restaurant }) {
 
         {cuisine?.length > 0
           ? cuisine?.map((x) => <Title data={x.name} />)
-          : "no data"}
+          : "There is currently no Cuisine data"}
       </Grid>
     </Grid>
   );

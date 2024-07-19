@@ -1,31 +1,66 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ViewInfo from "../components/ViewInfo";
 
 function Home() {
-  // const data = [
-  //   { id: 1, name: "hello" },
-  //   { id: 2, name: "herro" },
-  // ];
+  // let url = "http://localhost:8000/";
+  let url = "http://ec2-3-17-109-190.us-east-2.compute.amazonaws.com:8000/";
 
-  let url = "http://localhost:8000/";
-  const [data, setData] = useState([]);
+  const [restaurant, setRestaurant] = useState([]);
+  const [cuisine, setCuisine] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const toggleButton = () => {
+    setVisible(!visible);
+  };
 
   const grabData = async () => {
     let res = await axios.get(`${url}api/restaurants/`);
 
-    if (res) {
-      setData(res.data);
+    if (res.data) {
+      setRestaurant(res.data);
+    }
+  };
+
+  const grabCuisines = async () => {
+    let res = await axios.get(`${url}api/cuisine/`);
+
+    if (res.data) {
+      setCuisine(res.data);
+      console.log(res.data);
     }
   };
 
   useEffect(() => {
     grabData();
+    grabCuisines();
   }, []);
 
   return (
-    <Box>{data?.length > 0 ? data?.map((x) => <Box>{x.name}</Box>) : ""}</Box>
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Typography variant="h2" pb={5}>
+        Restaurants & Cuisines
+      </Typography>
+      <Button
+        sx={{ background: "pink", color: "black" }}
+        onClick={toggleButton}
+      >
+        {visible ? "Click to Close" : "Click to Open"}
+      </Button>
+      <Typography></Typography>
+      {visible ? (
+        <ViewInfo visible={visible} restaurant={restaurant} cuisine={cuisine} />
+      ) : (
+        ""
+      )}
+    </Grid>
   );
 }
 
